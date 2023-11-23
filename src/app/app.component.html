@@ -1,25 +1,26 @@
 <h2>Weight Graph</h2>
 
 <!-- Container to show the already entered date-weight combination -->
-  <div class="container" *ngFor="let datum of data">
-    <div class="left-section">
+  <div class="container" *ngFor="let datum of data; let i = index">
+    <div class="inline-block">
       <span>Date: </span>
       <input type="date" [value]="datum.date" [disabled]="true">
     </div>
-    <div class="right-section">
+    <div class="inline-block">
       <span>Weight: </span>
       <input type="number" [value]="datum.weight" [disabled]="true">
     </div>
+    <button (click)="deleteData(i)">X</button>
     <div>&nbsp;</div>
   </div>
 
 <!-- Container to show the input box to add new data -->
 <div class="container">
-  <div class="left-section">
+  <div class="inline-block">
     <span>Date: </span>
     <input type="date" #date [min]="data[data.length-1]?.date">
   </div>
-  <div class="right-section">
+  <div class="inline-block">
     <span>Weight: </span>
     <input #weight type="number">
   </div>
@@ -28,9 +29,5 @@
 
 <br><br>
 <div class="bottom-section">
-  <div class="footer-btns">
-    <button (click)="clearData()" *ngIf="data.length">Clear Data</button>
-    <button (click)="generateGraph()" *ngIf="data.length">Generate Graph</button><br>
-  </div>
   <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 </div>
